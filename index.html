@@ -367,13 +367,14 @@
         </div>
 
         <div class="avatar-container">
-            <img src="avatar.jpg" alt="avatar" class="avatar" onerror="this.classList.add('error');">
+            <!-- Поддержка и .jpg и .png -->
+            <img src="avatar.jpg" alt="avatar" class="avatar" onerror="tryLoadPng(this);">
         </div>
 
         <div class="name">ZOBSI</div>
-        <div class="sub">всемогущий</div>
+        <div class="sub">всемрогущий</div>
 
-        <!-- Кнопки с правильными ссылками -->
+        <!-- Кнопки с правильными ссылками (ИСПРАВЛЕНО) -->
         <div class="buttons">
             <a href="https://t.me/zobsi" target="_blank" class="btn">◀ СВЯЗЬ ▶</a>
             <a href="https://t.me/zobsiks" target="_blank" class="btn">◀ КАНАЛ ▶</a>
@@ -381,11 +382,24 @@
         </div>
 
         <div class="footer">
-            <span>🩸 заказать сайт - @waxues🩸</span>
+            <span>🩸 такойже сайт можно заказать y @waxues 🩸</span>
         </div>
     </div>
 
     <script>
+        // Функция для загрузки PNG если JPG не нашелся
+        function tryLoadPng(img) {
+            if (!img.src.includes('avatar.png')) {
+                img.src = 'avatar.png';
+                img.onerror = function() { 
+                    this.classList.add('error');
+                    this.src = ''; // убираем битую ссылку
+                };
+            } else {
+                img.classList.add('error');
+            }
+        }
+
         // Переключение тем
         const themeBtns = document.querySelectorAll('.theme-btn');
         const body = document.body;
@@ -429,9 +443,11 @@
             });
         });
 
-        // Аватар
+        // Аватар (если сразу не грузится)
         const av = document.querySelector('.avatar');
-        av.addEventListener('error', function() { this.classList.add('error'); });
+        if (av.complete && av.naturalWidth === 0) {
+            tryLoadPng(av);
+        }
     </script>
 </body>
-</html>
+    </html>
