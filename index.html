@@ -22,22 +22,22 @@
         }
 
         .card {
-            max-width: 700px;
+            max-width: 820px;
             width: 100%;
             background: #0a0a0a;
             border: 1px solid #2a2a2a;
             border-radius: 48px 48px 36px 36px;
-            padding: 32px 24px 40px;
+            padding: 32px 20px 40px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 0 1px #333 inset;
         }
 
-        /* КОНТЕЙНЕР С КРЫЛЬЯМИ */
+        /* ===== ИДЕАЛЬНОЕ ВЫРАВНИВАНИЕ КРЫЛЬЕВ ===== */
         .wings-row {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 15px;
-            gap: 5px;
+            width: 100%;
         }
 
         .wing {
@@ -46,27 +46,32 @@
             color: #aaa;
             font-size: 11px;
             line-height: 1.1;
-            text-align: center;
+            text-align: left; /* текст прижимаем влево */
             filter: drop-shadow(0 0 8px #fff8);
             letter-spacing: 1px;
+            display: inline-block;
         }
 
+        /* Левое крыло - без смещений */
         .wing-left {
-            /* левое крыло — оригинал */
-            margin-right: -15px;
+            text-align: right; /* Выравниваем символы вправо, чтобы они были ближе к аватару */
+            margin-right: 5px;
         }
 
+        /* Правое крыло */
         .wing-right {
-            /* правое крыло — оригинал */
-            margin-left: -15px;
+            text-align: left;
+            margin-left: 5px;
         }
 
-        /* АВАТАР */
+        /* Аватар по центру */
         .avatar-container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             z-index: 5;
+            flex-shrink: 0;
         }
 
         .avatar {
@@ -90,7 +95,7 @@
             font-weight: 700;
             color: #f0f0f0;
             text-shadow: 0 0 15px #fff3;
-            margin: 5px 0 5px;
+            margin: 10px 0 5px;
             letter-spacing: 6px;
         }
 
@@ -102,10 +107,9 @@
             border-bottom: 1px solid #2e2e2e;
             padding-bottom: 18px;
             text-transform: uppercase;
-            word-spacing: 4px;
         }
 
-        /* КНОПКИ — ПЕРЕРАБОТАННАЯ СИСТЕМА КАПЕЛЬ */
+        /* ===== КНОПКИ С АНИМИРОВАННОЙ КРОВЬЮ ===== */
         .buttons {
             display: flex;
             flex-direction: column;
@@ -144,7 +148,7 @@
             font-size: 1.6rem;
         }
 
-        /* БЕЛЫЙ ФОН */
+        /* Белый фон */
         .btn::before {
             content: '';
             position: absolute;
@@ -156,12 +160,21 @@
             transition: opacity 0.2s;
         }
 
-        /* ПЕРЕРАБОТАННЫЕ КАПЛИ КРОВИ — текут вниз, с эффектом подтекания */
+        /* АНИМАЦИЯ КАПЕЛЬ КРОВИ */
+        @keyframes drip {
+            0% {
+                background-position: 0 0, 20px 30px, 10px 60px, 40px 20px, 70px 80px, 30px 50px, 0 0, 15px 10px, 5px 25px;
+            }
+            100% {
+                background-position: 0 100px, 20px 130px, 10px 160px, 40px 120px, 70px 180px, 30px 150px, 0 100px, 15px 110px, 5px 125px;
+            }
+        }
+
         .btn::after {
             content: '';
             position: absolute;
             top: 0; left: 0;
-            width: 100%; height: 100%;
+            width: 100%; height: 200%; /* Увеличиваем высоту для анимации */
             background: 
                 /* крупные капли */
                 radial-gradient(circle at 15% 20%, #c41e1e 4px, transparent 6px),
@@ -171,31 +184,37 @@
                 radial-gradient(circle at 25% 75%, #c41e1e 5px, transparent 7px),
                 radial-gradient(circle at 90% 85%, #d32f2f 4px, transparent 6px),
                 /* подтёки (вертикальные линии) */
-                linear-gradient(180deg, 
-                    transparent 0%, 
-                    #c41e1e 15%, 
-                    #8b0000 25%, 
-                    transparent 40%
+                repeating-linear-gradient(180deg, 
+                    transparent 0px, 
+                    transparent 10px,
+                    #c41e1e 10px,
+                    #8b0000 15px,
+                    transparent 20px,
+                    transparent 30px
                 ),
-                linear-gradient(120deg, 
-                    transparent 30%, 
-                    #b71c1c 45%, 
-                    #d32f2f 55%, 
-                    transparent 70%
+                repeating-linear-gradient(120deg, 
+                    transparent 0px,
+                    transparent 15px,
+                    #b71c1c 15px,
+                    #d32f2f 20px,
+                    transparent 25px,
+                    transparent 35px
                 ),
-                linear-gradient(60deg, 
-                    transparent 50%, 
-                    #8b0000 65%, 
-                    #c41e1e 75%, 
-                    transparent 90%
+                repeating-linear-gradient(60deg, 
+                    transparent 0px,
+                    transparent 12px,
+                    #8b0000 12px,
+                    #c41e1e 18px,
+                    transparent 24px,
+                    transparent 34px
                 );
-            background-size: 120px 120px, 150px 150px, 100px 100px, 180px 180px, 140px 140px, 160px 160px, 100% 70px, 100% 100px, 100% 80px;
+            background-size: 120px 120px, 150px 150px, 100px 100px, 180px 180px, 140px 140px, 160px 160px, 100% 40px, 100% 50px, 100% 45px;
             background-repeat: repeat;
             background-position: 0 0, 20px 30px, 10px 60px, 40px 20px, 70px 80px, 30px 50px, 0 0, 15px 10px, 5px 25px;
             opacity: 0;
             z-index: 9;
             pointer-events: none;
-            transition: opacity 0.25s;
+            transition: opacity 0.2s;
             mix-blend-mode: multiply;
             filter: drop-shadow(0 5px 3px #200);
         }
@@ -206,6 +225,7 @@
 
         .btn:hover::after {
             opacity: 0.95;
+            animation: drip 1.5s linear infinite; /* Бесконечная анимация стекания */
         }
 
         .btn:hover {
@@ -225,31 +245,30 @@
         /* тач-устройства */
         @media (hover: none) {
             .btn:active::before { opacity: 1; }
-            .btn:active::after { opacity: 0.95; }
+            .btn:active::after { 
+                opacity: 0.95;
+                animation: drip 1.5s linear infinite;
+            }
             .btn:active span,
             .btn:active i { color: #000; }
             .btn:active { border-color: #a00; transform: scale(0.99); }
         }
 
         /* адаптация */
-        @media (max-width: 650px) {
+        @media (max-width: 700px) {
             .wing { font-size: 9px; }
-            .avatar { width: 130px; height: 130px; }
         }
 
-        @media (max-width: 550px) {
-            .card { padding: 24px 16px 32px; }
+        @media (max-width: 600px) {
+            .card { padding: 24px 12px 32px; }
             .wing { font-size: 7px; }
-            .wing-left { margin-right: -20px; }
-            .wing-right { margin-left: -20px; }
+            .avatar { width: 120px; height: 120px; }
             .name { font-size: 2rem; }
             .btn { padding: 16px 18px; font-size: 1.2rem; }
         }
 
-        @media (max-width: 430px) {
+        @media (max-width: 480px) {
             .wing { font-size: 5.5px; }
-            .wing-left { margin-right: -25px; }
-            .wing-right { margin-left: -25px; }
         }
 
         .footer {
@@ -265,9 +284,9 @@
 </head>
 <body>
     <div class="card">
-        <!-- ЛЕВОЕ КРЫЛО + АВАТАР + ПРАВОЕ КРЫЛО (КАЖДОЕ ПО ОДНОМУ) -->
+        <!-- КРЫЛЬЯ ИДЕАЛЬНО ВЫРОВНЕНЫ ПО БОКАМ -->
         <div class="wings-row">
-            <!-- левое крыло (ТОЧНО ТВОЙ ASCII) -->
+            <!-- левое крыло -->
             <div class="wing wing-left">
                 ⠀⠀⠀⠀⡄<br>
                 ⠀⠀⠀⢠⡇<br>
@@ -309,12 +328,12 @@
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
             </div>
 
-            <!-- АВАТАР -->
+            <!-- АВАТАР ПО ЦЕНТРУ -->
             <div class="avatar-container">
                 <img src="avatar.jpg" alt="avatar" class="avatar" onerror="this.classList.add('error');">
             </div>
 
-            <!-- правое крыло (ТОЧНО ТВОЙ ASCII) -->
+            <!-- правое крыло -->
             <div class="wing wing-right">
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰<br>
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀<br>
@@ -358,9 +377,9 @@
         </div>
 
         <div class="name">ZOBSI</div>
-        <div class="sub">✧ ангел с грязными крыльями ✧</div>
+        <div class="sub">✧ ровные крылья · анимированная кровь ✧</div>
 
-        <!-- КНОПКИ С НОВОЙ СИСТЕМОЙ КАПЕЛЬ -->
+        <!-- КНОПКИ -->
         <div class="buttons">
             <a href="https://t.me/zobsi" target="_blank" class="btn">
                 <i>⌁</i><span>связь</span><i>⌁</i>
@@ -374,7 +393,7 @@
         </div>
 
         <div class="footer">
-            <span> такойже сайт можно заказать у @waxues<spann></span>
+            <span>🩸 сайт на подобии можно заказать у @waxues 🩸</span>
         </div>
     </div>
 
@@ -387,4 +406,4 @@
         })();
     </script>
 </body>
-    </html>
+</html>
