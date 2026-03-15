@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>ZOBSI · adapt</title>
+    <title>ZOBSI · крылья ровно</title>
     <style>
         * {
             margin: 0;
@@ -31,13 +31,13 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.9);
         }
 
-        /* ===== КРЫЛЬЯ ПО ЦЕНТРУ ===== */
+        /* ===== КРЫЛЬЯ ИДЕАЛЬНО ПО ЦЕНТРУ ===== */
         .wings-row {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
-            gap: 5px;
+            gap: 0;
         }
 
         .wing {
@@ -48,18 +48,22 @@
             white-space: pre;
             filter: drop-shadow(0 0 8px #fff6);
             background: transparent;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Левое крыло: фиксированная ширина, текст прижат к правому краю */
+        /* Левое крыло: фикс ширина, текст вправо */
         .wing-left {
             text-align: right;
             width: 260px;
+            align-items: flex-end;
         }
 
-        /* Правое крыло: фиксированная ширина, текст прижат к левому краю */
+        /* Правое крыло: фикс ширина, текст влево */
         .wing-right {
             text-align: left;
             width: 260px;
+            align-items: flex-start;
         }
 
         .avatar-container {
@@ -67,7 +71,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 0 5px;
+            margin: 0 10px;
             z-index: 5;
         }
 
@@ -139,7 +143,12 @@
             z-index: 3;
         }
 
-        /* Белый фон при наведении */
+        .btn i {
+            font-style: normal;
+            font-size: 1.8rem;
+        }
+
+        /* Белый фон */
         .btn::before {
             content: '';
             position: absolute;
@@ -151,7 +160,7 @@
             z-index: 1;
         }
 
-        /* АНИМАЦИЯ КАПЕЛЬ */
+        /* Анимация капель */
         @keyframes bloodDrip {
             0% { transform: translateY(-100%); opacity: 0.9; }
             80% { opacity: 0.6; }
@@ -231,9 +240,9 @@
 </head>
 <body>
     <div class="card">
-        <!-- КРЫЛЬЯ ПО ЦЕНТРУ (ровно посередине) -->
+        <!-- КРЫЛЬЯ С РАВНЫМ КОЛИЧЕСТВОМ СТРОК -->
         <div class="wings-row">
-            <!-- Левое крыло (оригинал) -->
+            <!-- Левое крыло (48 строк) -->
             <div class="wing wing-left">
                 ⠀⠀⠀⠀⡄
                 ⠀⠀⠀⢠⡇
@@ -273,6 +282,22 @@
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
             </div>
 
             <!-- Аватарка -->
@@ -280,7 +305,7 @@
                 <img src="avatar.jpg" alt="avatar" class="avatar" onerror="this.classList.add('error');">
             </div>
 
-            <!-- Правое крыло (оригинал) -->
+            <!-- Правое крыло (48 строк) -->
             <div class="wing wing-right">
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀
@@ -320,6 +345,20 @@
                 ⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                 ⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                 ⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
             </div>
         </div>
 
@@ -328,9 +367,9 @@
 
         <!-- КНОПКИ -->
         <div class="buttons">
-            <a href="https://t.me/zobsi" target="_blank" class="btn" id="btn1"><i>⌁</i><span>СВЯЗЬ</span><i>⌁</i></a>
-            <a href="https://t.me/zobsiks" target="_blank" class="btn" id="btn2"><i>◈</i><span>КАНАЛ</span><i>◈</i></a>
-            <a href="https://t.me/MariupolStarsMinbot" target="_blank" class="btn" id="btn3"><i>⚡</i><span>БОТ</span><i>⚡</i></a>
+            <a href="https://t.me/zobsi" target="_blank" class="btn"><i>◀</i><span>СВЯЗЬ</span><i>▶</i></a>
+            <a href="https://t.me/zobsiks" target="_blank" class="btn"><i>◀</i><span>КАНАЛ</span><i>▶</i></a>
+            <a href="https://t.me/MariupolStarsMinbot" target="_blank" class="btn"><i>◀</i><span>БОТ</span><i>▶</i></a>
         </div>
 
         <div class="footer">
@@ -340,39 +379,30 @@
 
     <script>
         (function() {
-            // Аватар
             const av = document.querySelector('.avatar');
             av.addEventListener('error', function() { this.classList.add('error'); });
 
-            // ===== ГЕНЕРАТОР КАПЕЛЬ КРОВИ =====
+            // Генератор капель крови
             const buttons = document.querySelectorAll('.btn');
             
             buttons.forEach(btn => {
                 btn.addEventListener('mouseenter', function(e) {
-                    // Удаляем старые капли, если есть
                     this.querySelectorAll('.drop').forEach(d => d.remove());
                     
                     for (let i = 0; i < 30; i++) {
                         const drop = document.createElement('div');
                         drop.className = 'drop';
                         
-                        // Размер
                         const w = 4 + Math.random() * 8;
                         const h = w * (1.2 + Math.random() * 0.5);
                         drop.style.width = w + 'px';
                         drop.style.height = h + 'px';
-                        
-                        // Позиция
                         drop.style.left = (Math.random() * 100) + '%';
                         drop.style.top = (Math.random() * 30 - 10) + '%';
                         
-                        // Анимация
                         const duration = 1 + Math.random() * 2;
                         const delay = Math.random() * 0.5;
                         drop.style.animation = `bloodDrip ${duration}s linear ${delay}s infinite`;
-                        
-                        // Цвет
-                        drop.style.background = `hsl(${Math.random() * 10 - 5}, 85%, 45%)`;
                         
                         btn.appendChild(drop);
                     }
@@ -382,7 +412,6 @@
                     this.querySelectorAll('.drop').forEach(d => d.remove());
                 });
 
-                // Для тач-устройств
                 btn.addEventListener('touchstart', function(e) {
                     this.querySelectorAll('.drop').forEach(d => d.remove());
                     for (let i = 0; i < 30; i++) {
