@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>zobsi · крылья & кровь</title>
+    <title>zobsi · два крыла по бокам</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
         }
 
         body {
-            background: #000000;
+            background: #000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,212 +22,197 @@
         }
 
         .card {
-            max-width: 560px;
+            max-width: 620px;
             width: 100%;
-            background: #0c0c0c;
-            border: 1px solid #2c2c2c;
-            border-radius: 60px 60px 44px 44px;
-            padding: 36px 28px 44px 28px;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.9), 0 0 0 1px #3a3a3a inset;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 48px 48px 36px 36px;
+            padding: 32px 24px 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 0 1px #333 inset;
         }
 
-        /* ----- АВАТАР С КРЫЛЬЯМИ (перьевые, ангельские) ----- */
-        .winged-avatar {
+        /* КРЫЛЬЯ ПО БОКАМ АВАТАРКИ (КАЖДОЕ СВОЁ) */
+        .avatar-with-wings {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             position: relative;
+        }
+
+        .wings-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .wing-ascii {
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre;
+            color: #aaa;
+            font-size: 12px;
+            line-height: 1.1;
+            text-align: center;
+            filter: drop-shadow(0 0 6px #fff6);
+        }
+
+        .wing-left {
+            /* левое крыло — оригинальное, без зеркала */
+            margin-right: -10px;
+        }
+
+        .wing-right {
+            /* правое крыло — оригинальное, без зеркала */
+            margin-left: -10px;
         }
 
         .avatar-core {
-            position: relative;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            z-index: 5;
         }
 
-        .avatar-img {
+        .avatar {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            background-color: #1c1c1c;
+            background-color: #1a1a1a;
             border: 4px solid #e0e0e0;
-            box-shadow: 0 10px 20px -5px rgba(255,255,255,0.08), 0 0 0 1px #7a7a7a;
-            z-index: 5;
-            position: relative;
+            box-shadow: 0 10px 20px -5px rgba(255,255,255,0.1), 0 0 0 1px #888;
         }
 
-        .avatar-img.error {
+        .avatar.error {
             background: #222 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="%23aaaaaa" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>') no-repeat center/50%;
         }
 
-        /* Крылья — многослойные перья */
-        .wing {
-            position: absolute;
-            top: 50%;
-            width: 110px;
-            height: 130px;
-            pointer-events: none;
-            z-index: 2;
-            filter: drop-shadow(0 8px 10px rgba(0,0,0,0.7));
-        }
-
-        .wing-left {
-            left: -75px;
-            transform: translateY(-50%) rotate(-7deg) scaleX(-1);
-        }
-
-        .wing-right {
-            right: -75px;
-            transform: translateY(-50%) rotate(7deg);
-        }
-
-        .wing svg {
-            width: 100%;
-            height: 100%;
-            fill: none;
-        }
-
-        /* стиль пера — ангельский, чёрно-белый */
-        .wing path {
-            stroke: #d6d6d6;
-            stroke-width: 1.8;
-            fill: #1d1d1d;
-            fill-opacity: 0.4;
-        }
-        .wing .feather-light {
-            stroke: #ffffff;
-            stroke-width: 1.5;
-            fill: #2b2b2b;
-            fill-opacity: 0.2;
-        }
-        .wing .feather-mid {
-            stroke: #b0b0b0;
-            fill: #232323;
-        }
-
-        /* Текст */
-        .tagline {
-            text-align: center;
-            color: #b3b3b3;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
+        /* ТЕКСТ */
         .name {
             text-align: center;
             font-size: 2.2rem;
             font-weight: 700;
             color: #f0f0f0;
-            text-shadow: 0 4px 6px black;
-            margin-bottom: 28px;
-            border-bottom: 1px solid #2a2a2a;
-            padding-bottom: 16px;
+            text-shadow: 0 0 10px #fff3;
+            margin: 10px 0 5px;
+            letter-spacing: 4px;
         }
 
-        /* ----- КНОПКИ С КАПЛЯМИ (стекают вниз) ----- */
-        .btn-group {
+        .sub {
+            text-align: center;
+            color: #9a9a9a;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #2e2e2e;
+            padding-bottom: 18px;
+        }
+
+        /* КНОПКИ С ВЕРТИКАЛЬНЫМИ КАПЛЯМИ */
+        .buttons {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
         }
 
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            background-color: #111111;
+            gap: 12px;
+            background: #111;
             border: 2px solid #3d3d3d;
-            border-radius: 80px;
+            border-radius: 100px;
             padding: 18px 20px;
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 500;
             text-decoration: none;
-            color: #eeeeee;
-            transition: all 0.2s ease;
+            color: #eee;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 7px 0 #010101, 0 6px 15px rgba(255,0,0,0.1);
-            border-bottom: 4px solid #5a5a5a;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 0 #020202;
+            border-bottom: 4px solid #555;
             z-index: 1;
         }
 
         .btn span, .btn i {
             position: relative;
-            z-index: 12;
+            z-index: 10;
             transition: color 0.2s;
         }
+
         .btn i {
             font-style: normal;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
         }
 
-        /* Белый слой */
+        /* БЕЛЫЙ ФОН */
         .btn::before {
             content: '';
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: #ffffff;
+            background: #fff;
             z-index: 8;
             opacity: 0;
             transition: opacity 0.2s;
         }
 
-        /* КАПЛИ КРОВИ — ВЕРТИКАЛЬНЫЕ ПОДТЁКИ */
+        /* КАПЛИ КРОВИ — ТОЛЬКО ВЕРТИКАЛЬНЫЕ ПОДТЁКИ */
         .btn::after {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: 
-                /* первый набор капель (смесь точек и вертикальных линий) */
-                radial-gradient(circle at 15% 10%, #d32f2f 4px, transparent 5px),
- dust:;
-                radial-gradient(circle at 92% 20%, #b71c1c 3px, transparent 5px),
-                radial-gradient(circle at 45% 30%, #f44336 4px, transparent 5px),
-                radial-gradient(circle at 70% 45%, #b71c1c 3px, transparent 5px),
-                radial-gradient(circle at 30% 60%, #d32f2f 4px, transparent 5px),
-                radial-gradient(circle at 85% 75%, #b71c1c 3px, transparent 5px),
-                /* стекающие капли (вертикальные линии) */
-                linear-gradient(180deg, transparent 0%, #b71c1c 20%, transparent 30%),
-                linear-gradient(20deg, transparent 40%, #d32f2f 45%, transparent 55%),
-                linear-gradient(340deg, transparent 70%, #b71c1c 80%, transparent 95%);
-            background-size: 80px 80px, 100px 120px, 140px 140px, 90px 90px, 120px 120px, 70px 70px, 100% 60px, 100% 80px, 100% 70px;
-            background-repeat: repeat;
-            background-position: 0 0, 10px 20px, 5px 5px, 30px 0, 60px 15px, 15px 40px, 0 0, 20px 10px, 5px 30px;
-            z-index: 9;
+            top: -20%; left: 0;
+            width: 100%; height: 140%;
+            background: repeating-linear-gradient(
+                180deg,
+                transparent,
+                transparent 12px,
+                #c41e1e 12px,
+                #8b0000 16px,
+                transparent 20px
+            );
             opacity: 0;
-            transition: opacity 0.2s;
-            mix-blend-mode: multiply;
+            z-index: 9;
             pointer-events: none;
+            transition: opacity 0.2s;
+            background-size: 100% 28px;
+            mask-image: radial-gradient(circle at 25% 40%, black 3px, transparent 4px),
+                        radial-gradient(circle at 60% 20%, black 4px, transparent 5px),
+                        radial-gradient(circle at 75% 70%, black 3px, transparent 4px),
+                        radial-gradient(circle at 40% 85%, black 4px, transparent 5px);
+            -webkit-mask-image: radial-gradient(circle at 25% 40%, black 3px, transparent 4px),
+                                radial-gradient(circle at 60% 20%, black 4px, transparent 5px),
+                                radial-gradient(circle at 75% 70%, black 3px, transparent 4px),
+                                radial-gradient(circle at 40% 85%, black 4px, transparent 5px);
+            -webkit-mask-composite: exclude;
+            mask-composite: exclude;
         }
 
-        /* наведение: всё проявляется */
         .btn:hover::before {
             opacity: 1;
         }
+
         .btn:hover::after {
             opacity: 0.9;
         }
+
         .btn:hover {
-            border-color: #8b0000;
-            box-shadow: 0 2px 20px #ff3b3b80, 0 0 0 2px #500 inset;
+            border-color: #a22;
+            box-shadow: 0 2px 20px #f33a, 0 0 0 1px #a00 inset;
             transform: scale(1.02);
             border-bottom-color: #a00;
         }
+
         .btn:hover span,
         .btn:hover i {
             color: #000;
             font-weight: 600;
-            text-shadow: 0 1px 4px rgba(255,255,240,0.6);
+            text-shadow: 0 1px 5px #fff9;
         }
 
-        /* touch-устройства */
+        /* тач-устройства */
         @media (hover: none) {
             .btn:active::before { opacity: 1; }
             .btn:active::after { opacity: 0.9; }
@@ -237,26 +222,31 @@
         }
 
         /* адаптация */
+        @media (max-width: 600px) {
+            .wing-ascii { font-size: 9px; }
+            .avatar { width: 120px; height: 120px; }
+        }
+
         @media (max-width: 500px) {
             .card { padding: 24px 16px 32px; }
-            .avatar-img { width: 120px; height: 120px; }
-            .wing { width: 85px; height: 100px; }
-            .wing-left { left: -60px; }
-            .wing-right { right: -60px; }
-            .name { font-size: 1.9rem; }
-            .btn { padding: 15px 16px; font-size: 1.2rem; }
+            .wing-ascii { font-size: 7px; }
+            .wing-left { margin-right: -15px; }
+            .wing-right { margin-left: -15px; }
+            .name { font-size: 1.8rem; }
+            .btn { padding: 15px; font-size: 1.2rem; }
         }
-        @media (max-width: 380px) {
-            .wing-left { left: -40px; }
-            .wing-right { right: -40px; }
-            .wing { width: 65px; height: 80px; }
+
+        @media (max-width: 400px) {
+            .wing-ascii { font-size: 5.5px; }
+            .wing-left { margin-right: -20px; }
+            .wing-right { margin-left: -20px; }
         }
 
         .footer {
             text-align: center;
-            color: #3a3a3a;
+            color: #444;
             font-size: 0.7rem;
-            margin-top: 28px;
+            margin-top: 30px;
             border-top: 1px solid #242424;
             padding-top: 16px;
         }
@@ -264,47 +254,103 @@
 </head>
 <body>
     <div class="card">
-        <!-- АВАТАР + АНГЕЛЬСКИЕ КРЫЛЬЯ (перьевые) -->
-        <div class="winged-avatar">
-            <div class="avatar-core">
-                <!-- левое крыло -->
-                <div class="wing wing-left">
-                    <svg viewBox="0 0 90 110" xmlns="http://www.w3.org/2000/svg">
-                        <!-- внешнее перо (большое) -->
-                        <path d="M45,55 Q20,40 15,15 Q25,30 42,25 Q35,0 48,5 Q61,0 55,25 Q72,30 80,15 Q75,40 45,55 Z" 
-                              class="feather-mid" stroke="#dddddd" fill="#232323"/>
-                        <!-- среднее перо -->
-                        <path d="M42,48 Q28,45 25,30 Q34,40 42,36 Q40,20 48,22 Q56,20 54,36 Q63,40 70,30 Q65,45 42,48 Z" 
-                              stroke="#f2f2f2" fill="#2b2b2b" fill-opacity="0.5"/>
-                        <!-- малое перо (верхнее) -->
-                        <path d="M47,38 Q42,50 49,58 Q56,50 52,38" stroke="#ffffff" fill="none" stroke-width="2.2"/>
-                        <!-- дополнительные штрихи -->
-                        <path d="M30,33 Q38,43 46,42 M54,42 Q62,44 68,35" stroke="#c0c0c0" fill="none" stroke-width="1.5"/>
-                    </svg>
+        <!-- ДВА КРЫЛА ПО БОКАМ (КАЖДОЕ СВОЁ, НЕ ЗЕРКАЛЬНЫЕ) -->
+        <div class="avatar-with-wings">
+            <div class="wings-container">
+                <!-- левое крыло (оригинал, не зеркалим) -->
+                <div class="wing-ascii wing-left">
+                    ⠀⠀⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⢠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀<br>
+                    ⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀<br>
+                    ⢀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⡀<br>
+                    ⠘⡀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡇⠀⢀⠇<br>
+                    ⠀⣧⠀⢸⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡇⠀⣼⠀<br>
+                    ⠀⢸⣆⠀⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⠀⣰⡏⠀<br>
+                    ⢱⡀⢿⣆⠸⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⡏⣰⡿⠀⡌<br>
+                    ⠀⢷⡈⢿⣧⣻⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣟⣴⡿⢁⡾⠀<br>
+                    ⢀⠈⢷⣌⢿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⡿⣡⡾⠁⡀<br>
+                    ⠀⠳⡈⢻⣦⡻⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣟⣵⡟⢁⠞⠀<br>
+                    ⠀⠀⠙⢦⡹⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣿⣿⣿⢏⣴⠋⠀⠀<br>
+                    ⠀⠀⠀⡈⠻⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠟⢁⠀⠀⠀<br>
+                    ⠀⠀⠀⠈⠢⣌⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⣡⠔⠁⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⢀⠈⠛⢶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠛⠁⡀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠉⠒⠦⣬⣛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛⣥⠴⠒⠉⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠠⠤⢤⣌⣉⣛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛⣉⣡⡤⠤⠄⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⣉⣭⣭⣽⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣯⣭⣭⣉⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⢉⣉⣭⣽⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣭⣉⣉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠒⠒⠛⠛⠛⠛⢛⣩⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣭⡛⠛⠛⠛⠛⠒⠒⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠤⠴⠾⠟⠛⣫⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣝⠛⠻⠷⠦⠤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⠶⠟⠛⣫⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣝⠛⠻⠶⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠾⠛⣡⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⢿⣎⠛⠷⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠚⠋⢀⠿⠋⡿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⢿⠙⠿⡄⠙⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⣿⠇⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇⠀⠀⠀⠀⠀⠀⢸⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                 </div>
 
-                <!-- фото (avatar.jpg) -->
-                <img src="avatar.jpg" alt="avatar" class="avatar-img" onerror="this.classList.add('error');">
+                <!-- АВАТАРКА ПО ЦЕНТРУ -->
+                <div class="avatar-core">
+                    <img src="avatar.jpg" alt="avatar" class="avatar" onerror="this.classList.add('error');">
+                </div>
 
-                <!-- правое крыло (зеркально) -->
-                <div class="wing wing-right">
-                    <svg viewBox="0 0 90 110" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M45,55 Q20,40 15,15 Q25,30 42,25 Q35,0 48,5 Q61,0 55,25 Q72,30 80,15 Q75,40 45,55 Z" 
-                              class="feather-mid" stroke="#dddddd" fill="#232323"/>
-                        <path d="M42,48 Q28,45 25,30 Q34,40 42,36 Q40,20 48,22 Q56,20 54,36 Q63,40 70,30 Q65,45 42,48 Z" 
-                              stroke="#f2f2f2" fill="#2b2b2b" fill-opacity="0.5"/>
-                        <path d="M47,38 Q42,50 49,58 Q56,50 52,38" stroke="#ffffff" fill="none" stroke-width="2.2"/>
-                        <path d="M30,33 Q38,43 46,42 M54,42 Q62,44 68,35" stroke="#c0c0c0" fill="none" stroke-width="1.5"/>
-                    </svg>
+                <!-- правое крыло (тоже оригинал, не зеркалим) -->
+                <div class="wing-ascii wing-right">
+                    ⠀⠀⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⢠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀<br>
+                    ⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀<br>
+                    ⢀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⡀<br>
+                    ⠘⡀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡇⠀⢀⠇<br>
+                    ⠀⣧⠀⢸⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡇⠀⣼⠀<br>
+                    ⠀⢸⣆⠀⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⠀⣰⡏⠀<br>
+                    ⢱⡀⢿⣆⠸⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⡏⣰⡿⠀⡌<br>
+                    ⠀⢷⡈⢿⣧⣻⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣟⣴⡿⢁⡾⠀<br>
+                    ⢀⠈⢷⣌⢿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⡿⣡⡾⠁⡀<br>
+                    ⠀⠳⡈⢻⣦⡻⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣟⣵⡟⢁⠞⠀<br>
+                    ⠀⠀⠙⢦⡹⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣿⣿⣿⢏⣴⠋⠀⠀<br>
+                    ⠀⠀⠀⡈⠻⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠟⢁⠀⠀⠀<br>
+                    ⠀⠀⠀⠈⠢⣌⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⣡⠔⠁⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⢀⠈⠛⢶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠛⠁⡀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠉⠒⠦⣬⣛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛⣥⠴⠒⠉⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠠⠤⢤⣌⣉⣛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛⣉⣡⡤⠤⠄⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⣉⣭⣭⣽⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣯⣭⣭⣉⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⢉⣉⣭⣽⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣭⣉⣉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠒⠒⠛⠛⠛⠛⢛⣩⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣭⡛⠛⠛⠛⠛⠒⠒⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠤⠴⠾⠟⠛⣫⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣝⠛⠻⠷⠦⠤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⠶⠟⠛⣫⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣝⠛⠻⠶⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠾⠛⣡⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⢿⣎⠛⠷⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠚⠋⢀⠿⠋⡿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⢿⠙⠿⡄⠙⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⣿⠇⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇⠀⠀⠀⠀⠀⠀⢸⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                 </div>
             </div>
         </div>
 
-        <div class="tagline">⚔️ angel with dirty wings ⚔️</div>
         <div class="name">ZOBSI</div>
+        <div class="sub">✧ два крыла · оригинальные ✧</div>
 
-        <!-- КНОПКИ (капли крови стекают вниз) -->
-        <div class="btn-group">
+        <!-- КНОПКИ -->
+        <div class="buttons">
             <a href="https://t.me/zobsi" target="_blank" class="btn">
                 <i>⌁</i><span>связь</span><i>⌁</i>
             </a>
@@ -312,23 +358,22 @@
                 <i>◈</i><span>канал</span><i>◈</i>
             </a>
             <a href="https://t.me/MariupolStarsMinbot" target="_blank" class="btn">
-                <i>☠</i><span>бот</span><i>☠</i>
+                <i>⚡</i><span>бот</span><i>⚡</i>
             </a>
         </div>
 
         <div class="footer">
-            <span>🕸️ белое становится чёрным, кровь стекает 🕸️</span>
+            <span>🩸 капли крови вниз · два оригинальных крыла 🩸</span>
         </div>
     </div>
 
     <script>
         (function() {
-            // не даём крыльям перекрывать клики + fallback
-            document.querySelectorAll('.wing').forEach(w => w.setAttribute('aria-hidden', 'true'));
-            if (!document.querySelector('.avatar-img').complete) {
-                // подстраховка, чтобы error класс сработал, если картинка не появится
+            const av = document.querySelector('.avatar');
+            if (!av.complete) {
+                av.addEventListener('error', function() { this.classList.add('error'); });
             }
         })();
     </script>
 </body>
-</html>
+                                                                                   </html>
