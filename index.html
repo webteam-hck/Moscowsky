@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>ZOBSI · крылья по бокам</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZOBSI · симметричные крылья</title>
     <style>
         * {
             margin: 0;
@@ -17,179 +17,148 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            padding: 16px;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 10px;
         }
 
         .card {
-            max-width: 950px;
-            width: 100%;
+            max-width: 100%;
+            width: 450px;
             background: #0a0a0a;
             border: 1px solid #2a2a2a;
-            border-radius: 60px 60px 40px 40px;
-            padding: 30px 10px 40px;
+            border-radius: 40px;
+            padding: 40px 15px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+            position: relative;
         }
 
-        /* ===== КРЫЛЬЯ ПО БОКАМ (ИСПРАВЛЕНО) ===== */
-        .wings-row {
+        /* ===== ГЛАВНЫЙ ФИКС КРЫЛЬЕВ ===== */
+        .wings-container {
+            position: relative;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: flex-start;
+            height: 280px; /* Увеличено под новый арт */
             margin-bottom: 20px;
-            gap: 0; /* Убираем зазор для плотного прилегания */
-            width: 100%;
+            overflow: hidden;
         }
 
         .wing {
-            font-family: 'Courier New', Courier, monospace;
-            color: #aaa;
-            font-size: 13px;
-            line-height: 1.1;
+            font-family: monospace;
+            color: #666;
+            font-size: 10px;
+            line-height: 7px; /* Чуть плотнее для вертикального арта */
+            letter-spacing: 0px;
             white-space: pre;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+            pointer-events: none;
             user-select: none;
-            flex: 1; /* Распределяем место поровну */
+            position: absolute;
+            top: 10px;
         }
 
         .wing-left {
-            display: flex;
-            justify-content: flex-end; /* Прижать к аватарке */
+            right: 52%;
             text-align: right;
         }
 
         .wing-right {
-            display: flex;
-            justify-content: flex-start; /* Прижать к аватарке */
+            left: 52%;
             text-align: left;
         }
 
         .avatar-container {
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 10px;
-            z-index: 5;
+            position: relative;
+            z-index: 10;
+            margin-top: 60px;
         }
 
         .avatar {
-            width: 150px;
-            height: 150px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
+            border: 3px solid #fff;
+            background: #111;
             object-fit: cover;
-            border: 4px solid #e0e0e0;
-            background: #1a1a1a;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
-        }
-
-        .avatar:hover {
-            box-shadow: 0 0 25px rgba(196, 30, 30, 0.5);
-            border-color: #c41e1e;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
         .avatar.error {
-            background: #222 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="%23aaaaaa" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>') no-repeat center/50%;
+            background: #222 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>') no-repeat center;
         }
 
         .name {
             text-align: center;
-            font-size: 2.8rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 800;
             color: #fff;
-            letter-spacing: 8px;
-            margin: 15px 0 0;
+            letter-spacing: 6px;
+            margin: 10px 0 5px;
+            text-transform: uppercase;
         }
 
         .sub {
             text-align: center;
-            color: #aaa;
-            font-size: 1rem;
-            margin-bottom: 35px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #2a2a2a;
-            text-transform: uppercase;
+            color: #444;
+            font-size: 0.8rem;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
         }
 
         .buttons {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 15px;
         }
 
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            background: #111;
-            border: 2px solid #3d3d3d;
-            border-radius: 100px;
-            padding: 18px 24px;
-            font-size: 1.5rem;
+            gap: 10px;
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 50px;
+            padding: 16px;
+            color: #fff;
             text-decoration: none;
-            color: #eee;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: 0.3s;
             position: relative;
             overflow: hidden;
-            border-bottom: 4px solid #555;
-            box-shadow: 0 6px 0 #020202;
-            transition: 0.2s;
-            z-index: 1;
+            border-bottom: 3px solid #333;
         }
 
-        .btn:hover::before { opacity: 1; }
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff; opacity: 0; transition: 0.2s; z-index: 1;
+        .btn:hover {
+            background: #fff;
+            color: #000;
+            border-bottom-color: #800;
         }
-
-        .btn span, .btn i { position: relative; z-index: 3; }
-
-        .btn:hover { border-color: #a22; box-shadow: 0 2px 25px #f33a; border-bottom-color: #a00; }
-        .btn:hover span, .btn:hover i { color: #000; font-weight: 600; }
 
         .drop {
             position: absolute;
-            background: #c41e1e;
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            z-index: 2;
+            background: #800;
+            width: 3px;
+            height: 6px;
+            border-radius: 50%;
             pointer-events: none;
+            animation: drip 1.2s linear forwards;
         }
 
-        @keyframes bloodDrip {
-            0% { transform: translateY(-100%); opacity: 0.9; }
-            100% { transform: translateY(250%); opacity: 0; }
+        @keyframes drip {
+            to { transform: translateY(150px); opacity: 0; }
         }
 
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .wing { font-size: 9px; }
-            .avatar { width: 120px; height: 120px; }
-            .name { font-size: 2.2rem; }
-        }
-
-        @media (max-width: 480px) {
-            .wing { font-size: 6px; }
-            .avatar { width: 90px; height: 90px; }
-            .btn { font-size: 1.2rem; padding: 14px; }
-        }
-
-        .footer {
-            text-align: center;
-            color: #444;
-            font-size: 0.7rem;
-            margin-top: 35px;
-            padding-top: 20px;
-            border-top: 1px solid #242424;
+        @media (max-width: 400px) {
+            .wing { font-size: 8px; line-height: 6px; }
+            .card { width: 100%; border-radius: 20px; }
+            .wings-container { height: 240px; }
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <div class="wings-row">
+        <div class="wings-container">
             <div class="wing wing-left">
 ⠀⠀⠀⠀⡄
 ⠀⠀⠀⢠⡇
@@ -222,95 +191,79 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇</div>
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇</div>
 
             <div class="avatar-container">
-                <img src="avatar.jpg" alt="avatar" class="avatar" onerror="this.classList.add('error');">
+                <img src="avatar.jpg" alt="" class="avatar" onerror="this.classList.add('error');">
             </div>
 
             <div class="wing wing-right">
-⢰⠀⠀⠀⠀
-⢸⡄⠀⠀⠀
-⢸⡇⠀⠀⠀
-⢸⡇⠀⠀⡀
-⣾⡇⠀⢀⠇
-⢠⣿⡇⠀⣼⠀
-⣾⣿⠀⣰⡏⠀
-⣼⣿⡏⣰⡿⠀⡌
-⣼⣿⣟⣴⡿⢁⡾⠀
-⣾⣿⣿⣿⡿⣡⡾⠁⡀
-⣴⣿⣿⣿⣿⣟⣵⡟⢁⠞⠀
-⣶⣿⣿⣿⣿⣿⣿⣿⢏⣴⠋⠀⠀
-⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠟⢁⠀⠀⠀
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⣡⠔⠁⠀⠀⠀
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠛⠁⡀⠀⠀⠀⠀
-⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛⣥⠴⠒⠉⠀⠀⠀⠀⠀
-⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛⣉⣡⡤⠤⠄⠀⠀⠀⠀⠀⠀
-⠹⣿⣿⣿⣿⣿⣿⣿⣿⣯⣭⣭⣉⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀
-⣿⣿⣿⣿⣿⣿⣿⣿⣭⣉⣉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣸⣿⣿⣿⣿⣿⣿⣿⣭⡛⠛⠛⠛⠛⠒⠒⠀⠀⠀⠀⠀⠀⠀⠀
-⣰⣿⣿⣿⣿⣿⣿⣿⣝⠛⠻⠷⠦⠤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣰⣿⣿⣿⣿⣿⣿⣿⣝⠛⠻⠶⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⣿⣿⣿⣿⣿⢿⣎⠛⠷⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⣿⣿⢿⠙⠿⡄⠙⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⣿⠇⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</div>
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡇⠀⢀⠇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡇⠀⣼⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⠀⣰⡏⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⡏⣰⡿⠀⡌
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣟⣴⡿⢁⡾⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⡿⣡⡾⠁⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣟⣵⡟⢁⠞⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣿⣿⣿⢏⣴⠋⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠟⢁⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣀⣠⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⣡⠔⠁⠀⠀⠀
+⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠛⠁⡀⠀⠀⠀⠀
+⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛⣥⠴⠒⠉⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣛⣉⣡⡤⠤⠄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣯⣭⣭⣉⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣭⣉⣉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣭⡛⠛⠛⠛⠛⠒⠒⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣝⠛⠻⠷⠦⠤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣝⠛⠻⠶⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢀⣿⣿⣿⣿⣿⣿⢿⣎⠛⠷⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⣿⣿⢿⠙⠿⡄⠙⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⣿⠇⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</div>
         </div>
 
         <div class="name">ZOBSI</div>
-        <div class="sub">КРЫЛЬЯ ПО БОКАМ · КРОВЬ ТЕЧЁТ</div>
+        <div class="sub">КРЫЛЬЯ ПО ЦЕНТРУ · КРОВЬ ТЕЧЁТ</div>
 
         <div class="buttons">
-            <a href="https://t.me/zobsi" target="_blank" class="btn"><i>⌁</i><span>СВЯЗЬ</span><i>⌁</i></a>
-            <a href="https://t.me/zobsiks" target="_blank" class="btn"><i>◈</i><span>КАНАЛ</span><i>◈</i></a>
-            <a href="https://t.me/MariupolStarsMinbot" target="_blank" class="btn"><i>⚡</i><span>БОТ</span><i>⚡</i></a>
-        </div>
-
-        <div class="footer">
-            <span>🩸 ИДЕАЛЬНО ровные крылья · анимированные капли 🩸</span>
+            <a href="#" class="btn">◀ СВЯЗЬ ▶</a>
+            <a href="#" class="btn">◀ КАНАЛ ▶</a>
+            <a href="#" class="btn">◀ БОТ ▶</a>
         </div>
     </div>
 
     <script>
-        (function() {
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => {
-                const startDrips = () => {
-                    for (let i = 0; i < 20; i++) {
-                        const drop = document.createElement('div');
-                        drop.className = 'drop';
-                        const w = 4 + Math.random() * 6;
-                        drop.style.width = w + 'px';
-                        drop.style.height = w * 1.5 + 'px';
-                        drop.style.left = Math.random() * 100 + '%';
-                        drop.style.top = '0';
-                        drop.style.animation = `bloodDrip ${1 + Math.random()}s linear forwards`;
-                        btn.appendChild(drop);
-                        setTimeout(() => drop.remove(), 2000);
-                    }
-                };
-                btn.addEventListener('mouseenter', startDrips);
-                btn.addEventListener('touchstart', startDrips, {passive: true});
+        document.querySelectorAll('.btn').forEach(button => {
+            const createDrop = () => {
+                const drop = document.createElement('div');
+                drop.className = 'drop';
+                drop.style.left = Math.random() * 100 + '%';
+                button.appendChild(drop);
+                setTimeout(() => drop.remove(), 1200);
+            };
+            button.addEventListener('mouseenter', () => {
+                for(let i=0; i<15; i++) setTimeout(createDrop, i * 50);
             });
-        })();
+            button.addEventListener('touchstart', () => {
+                for(let i=0; i<10; i++) createDrop();
+            });
+        });
     </script>
 </body>
 </html>
