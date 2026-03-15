@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ZOBSI · симметричные крылья</title>
+    <title>ZOBSI · идеальные крылья</title>
     <style>
         * {
             margin: 0;
@@ -30,56 +30,58 @@
             padding: 40px 15px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.9);
             position: relative;
+            overflow: hidden;
         }
 
-        /* ===== ГЛАВНЫЙ ФИКС КРЫЛЬЕВ ===== */
+        /* ===== КОНТЕЙНЕР ДЛЯ КРЫЛЬЕВ ===== */
         .wings-container {
             position: relative;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            height: 280px; /* Увеличено под новый арт */
-            margin-bottom: 20px;
-            overflow: hidden;
+            height: 320px; /* Высота под длинные крылья */
+            margin-bottom: 10px;
         }
 
         .wing {
             font-family: monospace;
             color: #666;
-            font-size: 10px;
-            line-height: 7px; /* Чуть плотнее для вертикального арта */
+            font-size: 9px; /* Оптимальный размер, чтобы не ломались строки */
+            line-height: 7.5px; /* Точный контроль вертикали */
             letter-spacing: 0px;
             white-space: pre;
             pointer-events: none;
             user-select: none;
             position: absolute;
-            top: 10px;
+            top: 0;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.1));
         }
 
+        /* Позиционирование от центра (50%) */
         .wing-left {
-            right: 52%;
+            right: 53%;
             text-align: right;
         }
 
         .wing-right {
-            left: 52%;
+            left: 53%;
             text-align: left;
         }
 
         .avatar-container {
             position: relative;
             z-index: 10;
-            margin-top: 60px;
+            margin-top: 50px; /* Аватарка чуть ниже начала крыльев */
         }
 
         .avatar {
-            width: 110px;
-            height: 110px;
+            width: 125px;
+            height: 125px;
             border-radius: 50%;
-            border: 3px solid #fff;
+            border: 4px solid #fff;
             background: #111;
             object-fit: cover;
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            box-shadow: 0 0 30px rgba(255,255,255,0.1);
         }
 
         .avatar.error {
@@ -88,71 +90,88 @@
 
         .name {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: #fff;
             letter-spacing: 6px;
-            margin: 10px 0 5px;
+            margin: 15px 0 5px;
             text-transform: uppercase;
         }
 
         .sub {
             text-align: center;
-            color: #444;
-            font-size: 0.8rem;
-            margin-bottom: 30px;
+            color: #555;
+            font-size: 0.85rem;
+            margin-bottom: 35px;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
+        /* ===== КНОПКИ ===== */
         .buttons {
             display: flex;
             flex-direction: column;
             gap: 15px;
+            padding: 0 10px;
         }
 
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: #000;
+            gap: 15px;
+            background: #0d0d0d;
             border: 1px solid #333;
-            border-radius: 50px;
-            padding: 16px;
-            color: #fff;
+            border-radius: 100px;
+            padding: 18px;
+            color: #eee;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             transition: 0.3s;
             position: relative;
             overflow: hidden;
-            border-bottom: 3px solid #333;
+            border-bottom: 4px solid #222;
         }
 
         .btn:hover {
             background: #fff;
             color: #000;
             border-bottom-color: #800;
+            transform: translateY(-2px);
         }
 
+        /* Капли крови */
         .drop {
             position: absolute;
-            background: #800;
-            width: 3px;
-            height: 6px;
-            border-radius: 50%;
+            background: #c41e1e;
+            width: 4px;
+            height: 8px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             pointer-events: none;
+            z-index: 2;
             animation: drip 1.2s linear forwards;
         }
 
         @keyframes drip {
-            to { transform: translateY(150px); opacity: 0; }
+            0% { transform: translateY(-20px); opacity: 1; }
+            100% { transform: translateY(120px); opacity: 0; }
         }
 
-        @media (max-width: 400px) {
-            .wing { font-size: 8px; line-height: 6px; }
-            .card { width: 100%; border-radius: 20px; }
-            .wings-container { height: 240px; }
+        @media (max-width: 480px) {
+            .wing { font-size: 7.5px; line-height: 6.5px; }
+            .wings-container { height: 260px; }
+            .avatar { width: 110px; height: 110px; }
+            .name { font-size: 2rem; }
+        }
+
+        .footer {
+            text-align: center;
+            color: #333;
+            font-size: 0.7rem;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid #1a1a1a;
         }
     </style>
 </head>
@@ -191,7 +210,13 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇</div>
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇</div>
 
             <div class="avatar-container">
                 <img src="avatar.jpg" alt="" class="avatar" onerror="this.classList.add('error');">
@@ -239,12 +264,16 @@
         </div>
 
         <div class="name">ZOBSI</div>
-        <div class="sub">КРЫЛЬЯ ПО ЦЕНТРУ · КРОВЬ ТЕЧЁТ</div>
+        <div class="sub">Крылья по бокам · Кровь течёт</div>
 
         <div class="buttons">
-            <a href="#" class="btn">◀ СВЯЗЬ ▶</a>
-            <a href="#" class="btn">◀ КАНАЛ ▶</a>
-            <a href="#" class="btn">◀ БОТ ▶</a>
+            <a href="https://t.me/zobsi" target="_blank" class="btn"><span>⌁ СВЯЗЬ ⌁</span></a>
+            <a href="https://t.me/zobsiks" target="_blank" class="btn"><span>◈ КАНАЛ ◈</span></a>
+            <a href="https://t.me/MariupolStarsMinbot" target="_blank" class="btn"><span>⚡ БОТ ⚡</span></a>
+        </div>
+
+        <div class="footer">
+            <span>🩸 ИДЕАЛЬНО ровные крылья · анимированные капли 🩸</span>
         </div>
     </div>
 
@@ -258,7 +287,7 @@
                 setTimeout(() => drop.remove(), 1200);
             };
             button.addEventListener('mouseenter', () => {
-                for(let i=0; i<15; i++) setTimeout(createDrop, i * 50);
+                for(let i=0; i<15; i++) setTimeout(createDrop, i * 60);
             });
             button.addEventListener('touchstart', () => {
                 for(let i=0; i<10; i++) createDrop();
