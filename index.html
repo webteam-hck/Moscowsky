@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ZOBSI • adapt</title>
+    <title>ZOBSI · adapt</title>
     <style>
         * {
             margin: 0;
@@ -415,7 +415,7 @@
             });
         });
 
-        // Капли крови
+        // Капли крови - ИСПРАВЛЕНО (теперь ссылки работают)
         document.querySelectorAll('.btn').forEach(button => {
             const createDrop = () => {
                 const drop = document.createElement('div');
@@ -435,8 +435,8 @@
                 }
             });
 
-            button.addEventListener('touchstart', (e) => {
-                e.preventDefault();
+            // УБИРАЕМ touchstart с preventDefault - теперь ссылки работают на телефонах
+            button.addEventListener('touchstart', () => {
                 for(let i = 0; i < 15; i++) {
                     setTimeout(createDrop, i * 30);
                 }
@@ -450,4 +450,4 @@
         }
     </script>
 </body>
-    </html>
+</html>
